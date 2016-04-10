@@ -1,2 +1,14 @@
 www/typings/
 www/node_modules/
+
+.idea/.name
+
+.idea/misc.xml
+
+.idea/modules.xml
+
+.idea/vcs.xml
+
+.idea/workspace.xml
+
+.idea/xsheet.iml

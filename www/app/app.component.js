@@ -11,26 +11,48 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var AppComponent;
+    var Sheet, AppComponent, SHEETS;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
+            Sheet = (function () {
+                function Sheet() {
+                }
+                return Sheet;
+            }());
+            exports_1("Sheet", Sheet);
             AppComponent = (function () {
                 function AppComponent() {
+                    this.sheets = SHEETS;
+                    this.title = 'X-Sheet';
                 }
+                AppComponent.prototype.onSelect = function (sheet) { this.selectedSheet = sheet; };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'x-sheet',
-                        template: '<h1>My First Angular 2 App</h1>'
+                        template: "\n    <h1>{{title}}</h1>\n\n    <ul class=\"sheet-list\">\n      <li *ngFor=\"#sheet of sheets\" (click)=\"onSelect(sheet)\">#{{sheet.id}} {{sheet.name}}</li>\n    </ul>\n\n    <hr>\n    <div *ngIf=\"selectedSheet\">\n    <h2>{{selectedSheet.name}} details!</h2>\n    <div><label>id: </label>{{selectedSheet.id}}</div>\n    <div>\n      <label>name: </label>\n      <input [(ngModel)]=\"selectedSheet.name\" placeholder=\"Sheet name\"/>\n  </div>\n</div>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
             }());
             exports_1("AppComponent", AppComponent);
+            // Hardcoded stuff dev
+            SHEETS = [
+                { "id": 11, "name": "Eleven" },
+                { "id": 12, "name": "Twelve" },
+                { "id": 13, "name": "Thirteen" },
+                { "id": 14, "name": "Fourteen" },
+                { "id": 15, "name": "Fifteen" },
+                { "id": 16, "name": "Sixteen" },
+                { "id": 17, "name": "Seventeen" },
+                { "id": 18, "name": "Eighteen" },
+                { "id": 19, "name": "Nineteen" },
+                { "id": 20, "name": "Twenty" }
+            ];
         }
     }
 });
