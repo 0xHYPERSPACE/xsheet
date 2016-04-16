@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', './sheet-detail.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,20 +10,17 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
-    var Sheet, AppComponent, SHEETS;
+    var core_1, sheet_detail_component_1;
+    var AppComponent, SHEETS;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (sheet_detail_component_1_1) {
+                sheet_detail_component_1 = sheet_detail_component_1_1;
             }],
         execute: function() {
-            Sheet = (function () {
-                function Sheet() {
-                }
-                return Sheet;
-            }());
-            exports_1("Sheet", Sheet);
             AppComponent = (function () {
                 function AppComponent() {
                     this.sheets = SHEETS;
@@ -33,7 +30,8 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'x-sheet',
-                        template: "\n    <h1>{{title}}</h1>\n\n    <ul class=\"sheet-list\">\n      <li *ngFor=\"#sheet of sheets\" (click)=\"onSelect(sheet)\">#{{sheet.id}} {{sheet.name}}</li>\n    </ul>\n\n    <hr>\n    <div *ngIf=\"selectedSheet\">\n    <h2>{{selectedSheet.name}} details!</h2>\n    <div><label>id: </label>{{selectedSheet.id}}</div>\n    <div>\n      <label>name: </label>\n      <input [(ngModel)]=\"selectedSheet.name\" placeholder=\"Sheet name\"/>\n  </div>\n</div>\n    "
+                        template: "\n    <h1>{{title}}</h1>\n\n    <ul class=\"sheet-list\">\n      <li *ngFor=\"#sheet of sheets\" (click)=\"onSelect(sheet)\" [class.selected]=\"sheet === selectedSheet\">#{{sheet.id}} {{sheet.name}}</li>\n    </ul>\n\n    <hr>\n    <sheet-detail [sheet]=\"selectedSheet\"></sheet-detail>\n    ",
+                        directives: [sheet_detail_component_1.SheetDetailComponent]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

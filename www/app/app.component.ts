@@ -1,10 +1,6 @@
 import {Component} from 'angular2/core';
-
-
-export class Sheet {
-  id: number;
-  name: string;
-}
+import {Sheet} from './sheet';
+import {SheetDetailComponent} from './sheet-detail.component';
 
 
 @Component({
@@ -13,19 +9,13 @@ export class Sheet {
     <h1>{{title}}</h1>
 
     <ul class="sheet-list">
-      <li *ngFor="#sheet of sheets" (click)="onSelect(sheet)">#{{sheet.id}} {{sheet.name}}</li>
+      <li *ngFor="#sheet of sheets" (click)="onSelect(sheet)" [class.selected]="sheet === selectedSheet">#{{sheet.id}} {{sheet.name}}</li>
     </ul>
 
     <hr>
-    <div *ngIf="selectedSheet">
-    <h2>{{selectedSheet.name}} details!</h2>
-    <div><label>id: </label>{{selectedSheet.id}}</div>
-    <div>
-      <label>name: </label>
-      <input [(ngModel)]="selectedSheet.name" placeholder="Sheet name"/>
-  </div>
-</div>
-    `
+    <sheet-detail [sheet]="selectedSheet"></sheet-detail>
+    `,
+  directives: [SheetDetailComponent]
 })
 
 

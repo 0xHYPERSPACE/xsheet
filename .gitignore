@@ -12,3 +12,5 @@ www/node_modules/
 .idea/workspace.xml
 
 .idea/xsheet.iml
+
+npm-debug.log
