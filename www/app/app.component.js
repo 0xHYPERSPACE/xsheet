@@ -41,7 +41,7 @@ System.register(['angular2/core', './sheet-detail.component'], function(exports_
             // Hardcoded stuff dev
             SHEETS = [
                 { "id": 11, "name": "Eleven" },
-                { "id": 12, "name": "Twelve" },
+                { "id": 12, "name": "Twelve", animator: "Sinisa" },
                 { "id": 13, "name": "Thirteen" },
                 { "id": 14, "name": "Fourteen" },
                 { "id": 15, "name": "Fifteen" },

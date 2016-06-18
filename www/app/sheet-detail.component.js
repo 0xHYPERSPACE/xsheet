@@ -31,7 +31,7 @@ System.register(['angular2/core', './sheet'], function(exports_1, context_1) {
                 SheetDetailComponent = __decorate([
                     core_1.Component({
                         selector: 'sheet-detail',
-                        template: "\n    <div *ngIf=\"sheet\">\n      <h2>{{sheet.name}} details!</h2>\n      <div><label>id: </label>{{sheet.id}}</div>\n      <div>\n        <label>name: </label>\n        <input [(ngModel)]=\"sheet.name\" placeholder=\"name\"/>\n      </div>\n    </div>\n  "
+                        template: "\n    <div *ngIf=\"sheet\">\n      <h2>{{sheet.name}} details!</h2>\n      <div><label>id: </label>{{sheet.id}}</div>\n      <div>\n        <label>name: </label>\n        <input [(ngModel)]=\"sheet.name\" placeholder=\"name\"/>\n        <br>\n        {{sheet.animator}}\n      </div>\n    </div>\n  "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SheetDetailComponent);

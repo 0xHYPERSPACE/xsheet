@@ -11,6 +11,8 @@ import {Sheet} from './sheet';
       <div>
         <label>name: </label>
         <input [(ngModel)]="sheet.name" placeholder="name"/>
+        <br>
+        {{sheet.animator}}
       </div>
     </div>
   `
