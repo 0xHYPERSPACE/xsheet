@@ -1,23 +1,29 @@
-import {Component, Input} from 'angular2/core';
-import {Sheet} from './sheet';
+import { Component, Input, OnInit } from 'angular2/core';
+import { RouteParams } from 'angular2/router';
 
+import { Sheet } from './sheet';
+import { SheetService } from './sheet.service';
 
 @Component({
-  selector: 'sheet-detail',
-  template: `
-    <div *ngIf="sheet">
-      <h2>{{sheet.name}} details!</h2>
-      <div><label>id: </label>{{sheet.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="sheet.name" placeholder="name"/>
-        <br>
-        {{sheet.animator}}
-      </div>
-    </div>
-  `
+  selector: 'my-sheet-detail',
+  templateUrl: 'app/sheet-detail.component.html',
+  styleUrls: ['app/sheet-detail.component.css']
 })
-export class SheetDetailComponent {
-  @Input()
-    sheet: Sheet;
+export class SheetDetailComponent implements OnInit {
+  @Input() sheet: Sheet;
+
+  constructor(
+    private _sheetService: SheetService,
+    private _routeParams: RouteParams) {
+  }
+
+  ngOnInit() {
+    let id = +this._routeParams.get('id');
+    this._sheetService.getSheet(id)
+      .then(sheet => this.sheet = sheet);
+  }
+
+  goBack() {
+    window.history.back();
+  }
 }

@@ -1,4 +1,4 @@
-System.register(['angular2/core', './sheet-detail.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './dashboard.component', './sheets.component', './sheet-detail.component', './sheet.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,47 +10,67 @@ System.register(['angular2/core', './sheet-detail.component'], function(exports_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, sheet_detail_component_1;
-    var AppComponent, SHEETS;
+    var core_1, router_1, dashboard_component_1, sheets_component_1, sheet_detail_component_1, sheet_service_1;
+    var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
+            function (dashboard_component_1_1) {
+                dashboard_component_1 = dashboard_component_1_1;
+            },
+            function (sheets_component_1_1) {
+                sheets_component_1 = sheets_component_1_1;
+            },
             function (sheet_detail_component_1_1) {
                 sheet_detail_component_1 = sheet_detail_component_1_1;
+            },
+            function (sheet_service_1_1) {
+                sheet_service_1 = sheet_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
-                    this.sheets = SHEETS;
-                    this.title = 'X-Sheet';
+                    this.title = 'Tour of Sheets';
                 }
-                AppComponent.prototype.onSelect = function (sheet) { this.selectedSheet = sheet; };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'x-sheet',
-                        template: "\n    <h1>{{title}}</h1>\n\n    <ul class=\"sheet-list\">\n      <li *ngFor=\"#sheet of sheets\" (click)=\"onSelect(sheet)\" [class.selected]=\"sheet === selectedSheet\">#{{sheet.id}} {{sheet.name}}</li>\n    </ul>\n\n    <hr>\n    <sheet-detail [sheet]=\"selectedSheet\"></sheet-detail>\n    ",
-                        directives: [sheet_detail_component_1.SheetDetailComponent]
-                    }), 
+                        template: "\n    <h1>{{title}}</h1>\n    <nav>\n      <a [routerLink]=\"['Dashboard']\">Dashboard</a>\n      <a [routerLink]=\"['Sheets']\">Sheets</a>\n    </nav>\n    <router-outlet></router-outlet>\n  ",
+                        styleUrls: ['app/app.component.css'],
+                        directives: [router_1.ROUTER_DIRECTIVES],
+                        providers: [
+                            router_1.ROUTER_PROVIDERS,
+                            sheet_service_1.SheetService
+                        ]
+                    }),
+                    router_1.RouteConfig([
+                        {
+                            path: '/dashboard',
+                            name: 'Dashboard',
+                            component: dashboard_component_1.DashboardComponent,
+                            useAsDefault: true
+                        },
+                        {
+                            path: '/detail/:id',
+                            name: 'SheetDetail',
+                            component: sheet_detail_component_1.SheetDetailComponent
+                        },
+                        {
+                            path: '/sheets',
+                            name: 'Sheets',
+                            component: sheets_component_1.SheetsComponent
+                        }
+                    ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
             }());
             exports_1("AppComponent", AppComponent);
-            // Hardcoded stuff dev
-            SHEETS = [
-                { "id": 11, "name": "Eleven" },
-                { "id": 12, "name": "Twelve", animator: "Sinisa" },
-                { "id": 13, "name": "Thirteen" },
-                { "id": 14, "name": "Fourteen" },
-                { "id": 15, "name": "Fifteen" },
-                { "id": 16, "name": "Sixteen" },
-                { "id": 17, "name": "Seventeen" },
-                { "id": 18, "name": "Eighteen" },
-                { "id": 19, "name": "Nineteen" },
-                { "id": 20, "name": "Twenty" }
-            ];
         }
     }
 });

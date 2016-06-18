@@ -1,0 +1,8 @@
+<h3>Top Sheets</h3>
+<div class="grid grid-pad">
+  <div *ngFor="#sheet of sheets" (click)="gotoDetail(sheet)" class="col-1-4">
+    <div class="module sheet">
+      <h4>{{sheet.name}}</h4>
+    </div>
+  </div>
+</div>

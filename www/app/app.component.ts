@@ -1,46 +1,46 @@
-import {Component} from 'angular2/core';
-import {Sheet} from './sheet';
-import {SheetDetailComponent} from './sheet-detail.component';
+import { Component } from 'angular2/core';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 
+import { DashboardComponent } from './dashboard.component';
+import { SheetsComponent } from './sheets.component';
+import { SheetDetailComponent } from './sheet-detail.component';
+import { SheetService } from './sheet.service';
 
 @Component({
-    selector: 'x-sheet',
-    template: `
+  selector: 'x-sheet',
+  template: `
     <h1>{{title}}</h1>
-
-    <ul class="sheet-list">
-      <li *ngFor="#sheet of sheets" (click)="onSelect(sheet)" [class.selected]="sheet === selectedSheet">#{{sheet.id}} {{sheet.name}}</li>
-    </ul>
-
-    <hr>
-    <sheet-detail [sheet]="selectedSheet"></sheet-detail>
-    `,
-  directives: [SheetDetailComponent]
+    <nav>
+      <a [routerLink]="['Dashboard']">Dashboard</a>
+      <a [routerLink]="['Sheets']">Sheets</a>
+    </nav>
+    <router-outlet></router-outlet>
+  `,
+  styleUrls: ['app/app.component.css'],
+  directives: [ROUTER_DIRECTIVES],
+  providers: [
+    ROUTER_PROVIDERS,
+    SheetService
+  ]
 })
-
-
+@RouteConfig([
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: DashboardComponent,
+    useAsDefault: true
+  },
+  {
+    path: '/detail/:id',
+    name: 'SheetDetail',
+    component: SheetDetailComponent
+  },
+  {
+    path: '/sheets',
+    name: 'Sheets',
+    component: SheetsComponent
+  }
+])
 export class AppComponent {
-  public sheets = SHEETS;
-  title = 'X-Sheet';
-  selectedSheet: Sheet;
-
-  onSelect(sheet: Sheet) { this.selectedSheet = sheet; }
-
-
+  title = 'Tour of Sheets';
 }
-
-
-// Hardcoded stuff dev
-
-var SHEETS: Sheet[] = [
-  { "id": 11, "name": "Eleven" },
-  { "id": 12, "name": "Twelve", animator: "Sinisa" },
-  { "id": 13, "name": "Thirteen" },
-  { "id": 14, "name": "Fourteen" },
-  { "id": 15, "name": "Fifteen" },
-  { "id": 16, "name": "Sixteen" },
-  { "id": 17, "name": "Seventeen" },
-  { "id": 18, "name": "Eighteen" },
-  { "id": 19, "name": "Nineteen" },
-  { "id": 20, "name": "Twenty" }
-];

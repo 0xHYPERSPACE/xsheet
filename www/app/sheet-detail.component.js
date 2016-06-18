@@ -1,4 +1,4 @@
-System.register(['angular2/core', './sheet'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './sheet', './sheet.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,30 +10,48 @@ System.register(['angular2/core', './sheet'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, sheet_1;
+    var core_1, router_1, sheet_1, sheet_service_1;
     var SheetDetailComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
             function (sheet_1_1) {
                 sheet_1 = sheet_1_1;
+            },
+            function (sheet_service_1_1) {
+                sheet_service_1 = sheet_service_1_1;
             }],
         execute: function() {
             SheetDetailComponent = (function () {
-                function SheetDetailComponent() {
+                function SheetDetailComponent(_sheetService, _routeParams) {
+                    this._sheetService = _sheetService;
+                    this._routeParams = _routeParams;
                 }
+                SheetDetailComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    var id = +this._routeParams.get('id');
+                    this._sheetService.getSheet(id)
+                        .then(function (sheet) { return _this.sheet = sheet; });
+                };
+                SheetDetailComponent.prototype.goBack = function () {
+                    window.history.back();
+                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', sheet_1.Sheet)
                 ], SheetDetailComponent.prototype, "sheet", void 0);
                 SheetDetailComponent = __decorate([
                     core_1.Component({
-                        selector: 'sheet-detail',
-                        template: "\n    <div *ngIf=\"sheet\">\n      <h2>{{sheet.name}} details!</h2>\n      <div><label>id: </label>{{sheet.id}}</div>\n      <div>\n        <label>name: </label>\n        <input [(ngModel)]=\"sheet.name\" placeholder=\"name\"/>\n        <br>\n        {{sheet.animator}}\n      </div>\n    </div>\n  "
+                        selector: 'my-sheet-detail',
+                        templateUrl: 'app/sheet-detail.component.html',
+                        styleUrls: ['app/sheet-detail.component.css']
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [sheet_service_1.SheetService, router_1.RouteParams])
                 ], SheetDetailComponent);
                 return SheetDetailComponent;
             }());

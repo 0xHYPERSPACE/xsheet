@@ -1,0 +1,14 @@
+<div>
+  <h2>My Sheets</h2>
+  <ul class="sheets">
+    <li *ngFor="#sheet of sheets" 
+      [class.selected]="sheet === selectedSheet" 
+      (click)="onSelect(sheet)">
+      <span class="badge">{{sheet.id}}</span> {{sheet.name}}
+    </li>
+  </ul>
+  <div *ngIf="selectedSheet">
+    <h2>{{selectedSheet.name | uppercase}} is my sheet</h2>
+    <button (click)="gotoDetail()">View Details</button>
+  </div>
+</div>
